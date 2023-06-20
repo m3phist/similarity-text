@@ -4,14 +4,11 @@ import { withAuth } from 'next-auth/middleware';
 import { NextResponse } from 'next/server';
 import { getToken } from 'next-auth/jwt';
 
-const redis = new Redis({
-  url: 'UPSTASH_REDIS_REST_URL',
-  token: 'UPSTASH_REDIS_REST_TOKEN',
-});
+const redis = Redis.fromEnv();
 
 const ratelimit = new Ratelimit({
   redis: redis,
-  limiter: Ratelimit.slidingWindow(5, '1 h'),
+  limiter: Ratelimit.slidingWindow(3, '1 h'),
 });
 
 export default withAuth(
