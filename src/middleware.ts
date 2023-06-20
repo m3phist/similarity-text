@@ -8,7 +8,7 @@ import { getToken } from 'next-auth/jwt';
 
 const ratelimit = new Ratelimit({
   redis: Redis.fromEnv(),
-  limiter: Ratelimit.slidingWindow(1, '1 h'),
+  limiter: Ratelimit.slidingWindow(2, '1 h'),
 });
 
 export default withAuth(
