@@ -10,8 +10,8 @@ const redis = new Redis({
 });
 
 const ratelimit = new Ratelimit({
-  redis,
-  limiter: Ratelimit.slidingWindow(5, '1h'),
+  redis: redis,
+  limiter: Ratelimit.slidingWindow(5, '1 h'),
 });
 
 export default withAuth(
