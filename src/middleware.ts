@@ -22,12 +22,18 @@ export default withAuth(
         const { success } = await ratelimit.limit(ip);
 
         if (!success)
-          return NextResponse.json({ status: 429, error: 'Too many requests' });
+          return NextResponse.json(
+            { error: 'Too many requests' },
+            { status: 429 }
+          );
         return NextResponse.next();
       } catch (error) {
-        return NextResponse.json({
-          error: 'Internal Server Error',
-        });
+        return NextResponse.json(
+          {
+            error: 'Internal Server Error',
+          },
+          { status: 500 }
+        );
       }
     }
 
